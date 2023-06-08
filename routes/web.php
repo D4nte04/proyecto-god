@@ -30,4 +30,4 @@ Route::get('/lista-prof',[AdministradorController::class,'listaProf'])->name('pr
 
 Route::get('/profesores',[ProfesoresController::class,'index'])->name('profesores.index');
 Route::post('/profesores',[ProfesoresController::class,'profesorIngresar'])->name('profesores.ingresar');
-Route::get('/profesor/{profesor}',[ProfesoresController::class,'profesorIngresado'])->name('profesor.ingresado');
+Route::get('/profesor/{profesor}/propuesta/{propuesta}',[ProfesoresController::class,'profesorIngresado'])->name('profesor.ingresado');

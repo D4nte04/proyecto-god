@@ -2,47 +2,85 @@
 @extends('templates/templates')
 
 @section('principal')
-
-    {{-- principal --}}
+{{-- {{dd($profesor)}}     --}}
+{{-- principal --}}
 
 
     <div class="row mt-3 mb-3">
-        <div class="col-1 p-0"></div>
-        <div class="col-2 p-0 text-info">
-            <h3>Bienvenid@:</h3>
+        <div class="col-1 p-0 ms-5 text-info">
+            <h4>Bienvenido:</h4>
         </div>
-        <div class="col-2 text-info ms-4 ps-2">
-                <select class="form-control border-vanilla ms-5 w-5" name="profesor">
-                    <option selected disabled value="{{$profesor->id}}">{{$profesor->nombre.' '.$profesor->apellido}}</option> 
-        
-                </select>
-        </div>
-        <div class="col-2" style="margin-left:70px">
-                <a href="{{route('profesores.index')}}" class="btn btn-dark text-white me-1 fw-bold" type="submit" style="width: 110px;">Volver</a>
-        </div>
-             
-    </div>  
-    <div class="row mt-3 mb-3">
-        <div class="col-1 p-0"></div>
-        <div class="col-2 p-0 text-info">
-            <h3>Seleccione al alumno:</h3>
-        </div>
-        <div class="col-2 text-info ms-4 ps-2">
-            <form action="" method="POST">
+        <div class="col-6 text-info ms-4 ps-2">
+            <form action="{{route('profesores.index')}}" method="POST">
                 @csrf
-                <select class="form-control border-vanilla ms-5 w-5" name="alumno">
-                    <option selected disabled>Seleccione propuesta del alumno</option>
-                    @foreach ($estudiantes as $estudiante)
-                    <option value="{{$estudiante->rut}}">{{$estudiante->nombre.' '.$estudiante->apellido}}</option> 
-                    @endforeach
-                </select>
+                <div class="row">
+                    <div class="col-5">
+                        <select class="form-control border-vanilla" name="profesor">
+                            {{-- <option selected disabled>Seleccione el Profesor:</option> --}}
+                            @foreach ($profesores as $profe)
+                                <option @if($profe->id==$profesor->id) selected @endif
+                                     value="{{$profe->id}}">{{$profe->nombre.' '.$profe->apellido}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-2">
+                        <h4>Propuesta:</h4>
+                    </div>
+                    <div class="col-5">
+                        <select class="form-control border-vanilla" name="alumno">
+        
+                            @foreach ($estudiantes as $estudiante)
+                                @foreach ($propuestas as $prop)
+                                    @if($estudiante->rut == $prop->estudiante_rut)
+                                        <option @if($propuesta->estudiante_rut == $estudiante->rut) selected @endif value="{{$estudiante->rut}}">{{$estudiante->nombre.' '.$estudiante->apellido}}</option>
+                                    @endif
+                            @endforeach
+                            
+                             
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
         </div>
         <div class="col-2" style="margin-left:70px">
                 <button class="btn btn-dark text-white me-1 fw-bold" type="submit" style="width: 110px;">Acceder</button>
             </form>
         </div>
-    </div>
+        <div class="row mt-5">
+            <div class="col-1"></div>
+            <div class="col-10 p-0">
+                <table class="table table-bordered table-tabla border-vanilla table-striped">
+                    <thead>
+                        <tr>
+                            <th class="">Propuesta</th>
+                            <th>Fecha Entrega</th>
+                            <th class="d-flex justify-content-center">Comentarios</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr> 
+                            <td class="text-info ">
+                                <a href="{{$propuesta->documento}}">
+                                    {{$propuesta->id}}
+                                </a>
+                            </td>
+                            <td class="text-info">{{$propuesta->fecha}}</td>
+                            <td class="text-info">
+                                <form method="POST"  action="">
+                                    @csrf
+                                    <textarea placeholder="Retroalimentsación" rows="4" cols="50" name="comentarios" class="form-control">
+                                        </textarea>
 
+                                </form>
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+                
+    </div>      
 
 
 
@@ -51,3 +89,4 @@
 
     {{-- principal --}}
 @endsection
+    
