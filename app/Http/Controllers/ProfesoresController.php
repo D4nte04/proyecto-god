@@ -35,4 +35,12 @@ class ProfesoresController extends Controller
         $profesores     = Profesor::orderBy('id')->get();
         return view('profesores.profesor',compact(['profesor','propuesta','propuestas','estudiantes','profesores']));
     }
+    public function agregarProfesor(Request $request){
+        $profesor = new Profesor();
+        $profesor->nombre = $request->nombre;
+        $profesor->apellido = $request->apellido;
+        $profesor->email = $request->email;
+        $profesor->save();
+        return redirect()->route('prof.lista.prof');
+    }
 }

@@ -11,6 +11,7 @@ class Estudiante extends Model
     protected $table = 'estudiantes';
     protected $primaryKey = 'rut';
     protected $keyType = 'string';
+    public $timestamps = false;
 
     public function propuestas(){
         return $this->hasMany('App\Models\Propuesta');

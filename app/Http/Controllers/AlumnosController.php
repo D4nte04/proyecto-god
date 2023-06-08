@@ -58,6 +58,15 @@ class AlumnosController extends Controller
         return view('alumnos.comentarios',compact(['id','profesores']));
 
     }
+    public function agregarAlumno(Request $request){
+        $alumno = new Estudiante();
+        $alumno->rut = $request->rut;
+        $alumno->nombre = $request->nombre;
+        $alumno->apellido = $request->apellido;
+        $alumno->email = $request->email;
+        $alumno->save();
+        return redirect()->route('prof.lista.alum');
+    }
     // public function destroyPropuesta(Estudiante $alumno, Propuesta $propuesta)
     // {
     //     $url = $propuesta->documento;

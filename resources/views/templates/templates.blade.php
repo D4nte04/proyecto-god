@@ -22,9 +22,9 @@
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                
-                <span class="navbar-text">
+            <div class="collapse navbar-collapse justify-content-end " id="navbarSupportedContent">
+                @yield('principal-admin')
+                <span class="navbar-text ms-5 ">
                     <a href="#" class="btn btn-logout text-info text-decoration-none d-none d-md-block me-4">Cerrar Sesión</a>
                 </span>
                 
